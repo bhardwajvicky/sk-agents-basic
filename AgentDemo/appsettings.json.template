@@ -1,0 +1,6 @@
+﻿{
+  "OPEN_AI_MODEL": "your-model-name",
+  "OPEN_AI_KEY": "your-open-ai-key",
+  "OPEN_AI_ORG_ID": "your-open-ai-org-id"
+}
+
