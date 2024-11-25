@@ -2,11 +2,13 @@
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.Agents;
 using Microsoft.SemanticKernel.Agents.Chat;
+using Microsoft.SemanticKernel.Connectors.Ollama;
 using Microsoft.SemanticKernel.ChatCompletion;
 
 
 #pragma warning disable SKEXP0001 // Using directive is not required for the current code file.
 #pragma warning disable SKEXP0110 // Using directive is not required for the current code file.
+#pragma warning disable SKEXP0070
 
 namespace AgentDemo
 {
@@ -67,7 +69,6 @@ namespace AgentDemo
             Ensure that the proposal fully complies with all conference guidelines.
             Do not proceed to the next step until the current feedback has been addressed.
             """;
-
 
         private const string ConferenceOrganizerName = "ConferenceOrganizer";
         private const string ConferenceOrganizerInstructions =
@@ -164,7 +165,7 @@ namespace AgentDemo
             // 0: Software Developer and Conference Organizer
             // 1: Reviewer and Copy Writer
             // 2: Fleet Manager and Vehicle Supplier
-            int i =0;
+            int i =1;
             AgentGroupChat chat;
             ChatMessageContent input = new ChatMessageContent();
             switch (i)
@@ -225,7 +226,6 @@ namespace AgentDemo
 
             }
         
-
             Console.WriteLine($"###{AuthorRole.User}:");
             Console.WriteLine($"'{input}'###");
 
@@ -239,16 +239,25 @@ namespace AgentDemo
 
         protected static Kernel CreateKernelWithChatCompletion()
         {
+            var builder = Kernel.CreateBuilder();
+
+            
+            //Ollama with local LLM
+            var modelId = "llama3.1:70b";
+            var endpoint = new Uri("http://localhost:11434");
+            builder.Services.AddOllamaChatCompletion(modelId, endpoint);
+
+            /*
+            //Open AI used
             var config = new ConfigurationBuilder()
                        .AddJsonFile("appsettings.json")
                        .Build();
-
             var model = config["OPEN_AI_MODEL"];
             var key = config["OPEN_AI_KEY"];
             var orgId = config["OPEN_AI_ORG_ID"];
-
-            var builder = Kernel.CreateBuilder();
+            
             builder.AddOpenAIChatCompletion(model, key, orgId);
+            */
             return builder.Build();
         }
     }
@@ -271,5 +280,6 @@ namespace AgentDemo
     }
 }
 
+#pragma warning restore SKEXP0070
 #pragma warning restore SKEXP0001 // Using directive is not required for the current code file.
 #pragma warning restore SKEXP0110 // Using directive is not required for the current code file.

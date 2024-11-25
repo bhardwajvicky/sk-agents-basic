@@ -14,6 +14,25 @@ AgentDemo is a C# application that demonstrates the use of Microsoft Semantic Ke
 3. Rename `appsettings.json.template` to `appsettings.json`.
 4. Update the `appsettings.json` file with your OpenAI credentials.
 
+## Using Ollama with Local LLM
+1. dotnet add package Microsoft.SemanticKernel.Connectors.Ollama --version 1.30.0-alpha
+2. Add following code
+            //Ollama with local LLM
+            var modelId = "llama3.1:70b";
+            var endpoint = new Uri("http://localhost:11434");
+            builder.Services.AddOllamaChatCompletion(modelId, endpoint);
+3. Comment OpenAI code
+            //Open AI used
+            var config = new ConfigurationBuilder()
+                       .AddJsonFile("appsettings.json")
+                       .Build();
+            var model = config["OPEN_AI_MODEL"];
+            var key = config["OPEN_AI_KEY"];
+            var orgId = config["OPEN_AI_ORG_ID"];
+            
+            builder.AddOpenAIChatCompletion(model, key, orgId);
+
+
 ## Running the Application
 
 1. Build the solution.
@@ -121,6 +140,10 @@ In this scenario, the `FleetManager` and `VehicleSupplier` agents are used. The 
   - Does the budget align with market prices?
   - Are there any logistical challenges or ambiguities?
 - Only suggest one area of improvement at a time.
+
+## Result
+1. Check output of GPT-3.5-Turbo in SampelResult-OpenAI-GPT-3.5-T.md file
+2. Ollama hosting llama3.1:70 was used for testing & it used all the GPU on the mac.
 
 ## License
 This project is licensed under the MIT License.
