@@ -143,7 +143,9 @@ In this scenario, the `FleetManager` and `VehicleSupplier` agents are used. The 
 
 ## Result
 1. Check output of GPT-3.5-Turbo in SampelResult-OpenAI-GPT-3.5-T.md file
-2. Ollama hosting llama3.1:70 was used for testing & it used all the GPU on the mac.
+2. Ollama hosting llama3.1:70 was used for testing & it used all the GPU on the mac. Autonomus agents behaved differently, maybe I need to try with 405b or atleast 100+b token LLM.
+   ![Screenshot 2024-11-25 at 7 21 14 pm](https://github.com/user-attachments/assets/531e9b4b-bc6f-4f8a-bb28-c8c17b2f4415)
+
 
 ## License
 This project is licensed under the MIT License.
