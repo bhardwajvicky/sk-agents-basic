@@ -17,11 +17,14 @@ AgentDemo is a C# application that demonstrates the use of Microsoft Semantic Ke
 ## Using Ollama with Local LLM
 1. dotnet add package Microsoft.SemanticKernel.Connectors.Ollama --version 1.30.0-alpha
 2. Add following code
-            //Ollama with local LLM
-            var modelId = "llama3.1:70b";
-            var endpoint = new Uri("http://localhost:11434");
-            builder.Services.AddOllamaChatCompletion(modelId, endpoint);
-3. Comment OpenAI code
+```bash
+   //Ollama with local LLM
+   var modelId = "llama3.1:70b";
+   var endpoint = new Uri("http://localhost:11434");
+   builder.Services.AddOllamaChatCompletion(modelId, endpoint);
+```
+4. Comment OpenAI code
+   ```bash
             //Open AI used
             var config = new ConfigurationBuilder()
                        .AddJsonFile("appsettings.json")
@@ -31,7 +34,7 @@ AgentDemo is a C# application that demonstrates the use of Microsoft Semantic Ke
             var orgId = config["OPEN_AI_ORG_ID"];
             
             builder.AddOpenAIChatCompletion(model, key, orgId);
-
+```
 
 ## Running the Application
 
