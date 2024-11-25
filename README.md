@@ -24,7 +24,7 @@ AgentDemo is a C# application that demonstrates the use of Microsoft Semantic Ke
    builder.Services.AddOllamaChatCompletion(modelId, endpoint);
 ```
 4. Comment OpenAI code
-   ```bash
+```bash
             //Open AI used
             var config = new ConfigurationBuilder()
                        .AddJsonFile("appsettings.json")
